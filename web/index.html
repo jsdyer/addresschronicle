@@ -1,34 +1,9 @@
-<!doctype html>
-<html lang="en-CA">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="{{DESCRIPTION}}">
-  <title>{{TITLE}} · CoolCode</title>
-  <link rel="stylesheet" href="./style.css">
-  <script type="module" src="./app.mjs"></script>
-  {{VISIT_COUNTER}}
-</head>
-<body data-tool-id="{{TOOL_ID}}">
-  <a class="skip" href="#main">Skip to content</a>
-  <header><a href="https://coolcode.ca/">← CoolCode.ca</a><a href="{{SOURCE_URL}}">Source &amp; instructions ↗</a></header>
-  <main id="main">
-    <p class="eyebrow">Browser tool starter</p>
-    <h1>{{TITLE}}</h1>
-    <p class="intro">{{DESCRIPTION}}</p>
-    <section aria-labelledby="example-title">
-      <h2 id="example-title">Clean a list</h2>
-      <p>Trim spaces, skip blank lines and remove exact duplicates. Capitalization stays distinct.</p>
-      <div class="panels">
-        <div><label for="input">Your lines</label><textarea id="input" rows="10" maxlength="100000" spellcheck="false" placeholder="Paste one item per line"></textarea></div>
-        <div><label for="output">Cleaned lines</label><textarea id="output" rows="10" readonly spellcheck="false"></textarea></div>
-      </div>
-      <div class="actions"><button id="sample" type="button">Load example</button><button id="clear" type="button">Clear</button><button id="copy" type="button" hidden>Copy result</button></div>
-      <p id="status" role="status" aria-live="polite">Paste a list to begin.</p>
-      <noscript><p>This tool needs JavaScript to process your text. The source is available above.</p></noscript>
-    </section>
-    <aside aria-label="Privacy"><strong>Stays on your device.</strong> The browser processes your text in this tab. Reloading clears it.</aside>
-  </main>
-  <footer>Part of <a href="https://coolcode.ca/">the CoolCode collection</a>. {{ISSUE_LINK}}</footer>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Search Historical Vancouver and Halifax City Directories · CoolCode</title><meta name="description" content="{{DESCRIPTION}}"><link rel="stylesheet" href="./style.css">{{VISIT_COUNTER}}<script type="module" src="./app.mjs"></script></head><body data-tool-id="{{TOOL_ID}}">
+<header class="top"><a href="https://coolcode.ca/">CoolCode</a><span>Maps, places &amp; history</span><a href="{{SOURCE_URL}}">Source code</a></header><main>
+<section class="hero"><div><p class="eyebrow">A street has more than one story</p><h1>{{TITLE}}</h1><p class="lede">What was at this address?</p><p>Search original directory text for a street, house number, person or business. Follow each clue back to its scanned page.</p></div><div class="archive-card" aria-hidden="true"><span>DIRECTORIES · STREET BY STREET</span><div class="rule"></div><strong>Vancouver<br>Halifax</strong><div class="rule"></div><span>Names. Numbers. Earlier lives.</span></div></section>
+<p id="status" class="status" role="status">Loading the collection catalogue…</p>
+<section class="workbench"><form id="search-form"><div class="search-row"><label class="query">Address, street, person or business<input id="query" maxlength="140" minlength="2" required placeholder="e.g. 520 Granville or Barrington" autocomplete="off"></label><button id="search-button">Search directories</button></div><div class="filters"><label>Collection<select id="city"></select></label><label>Edition<select id="edition"><option value="all">All available editions</option></select></label><label>Match<select id="mode"><option value="words">All words close together</option><option value="phrase">Exact phrase (ignoring punctuation)</option></select></label></div><label class="check"><input id="surrounding" type="checkbox"> Include surrounding almanac and other-city pages</label></form><div id="examples" class="examples"></div><p class="small">Searches run locally after the selected indexes download. Your query is not sent to Internet Archive. OCR is imperfect: try a street name without its number or a shorter spelling.</p></section>
+<section class="results-area"><div class="result-head"><div><p class="eyebrow">Evidence from the page</p><h2 id="results-title">Start with a street you know</h2></div><div class="actions"><button id="show-saved" class="secondary">Saved evidence (0)</button><button id="export" class="secondary" disabled>Export results</button></div></div><p id="result-note" role="status"></p><div id="timeline" class="timeline"></div><div id="results" class="results"><p class="empty">Choose a collection and search. Every result includes the edition year, an OCR excerpt and a direct link to the original scan.</p></div><button id="more" class="secondary" hidden>Show more matches</button></section>
+<section class="collection"><p class="eyebrow">Know what is covered</p><h2>On the research shelf</h2><p>This is a selected collection, not every directory or every resident. Halifax volumes include business directories and wider almanac or multi-city material. Confirm the printed city heading before attributing an address.</p><div id="volumes" class="volume-grid"></div><p><a href="./data/catalogue.json">Download source catalogue and provenance</a></p></section>
+<section class="lower"><div><h2>From a match to a useful finding</h2><ol><li>Search the street first, then add the number or surname.</li><li>Open the scanned page. OCR may join columns or misread a digit.</li><li>Check the city, edition year and printed page.</li><li>Save the evidence and compare other available editions.</li></ol><p>Street names and numbering change. A directory entry is a historical claim made by that publication; no match is not proof that someone was absent.</p></div><div><h2>Your research stays in your browser</h2><p>Queries stay in memory. Only evidence you explicitly save is stored locally. Opening a scan contacts Internet Archive; it may use its own cookies. No account or API key is needed.</p><button id="clear-saved" class="secondary">Clear saved evidence</button><p id="save-status" role="status"></p><p class="small">Historical publications and OCR: Internet Archive and the contributing libraries listed above.</p></div></section>
+</main><footer><a href="https://coolcode.ca/">More CoolCode tools</a>{{ISSUE_LINK}}<span>Read the scan. Keep the citation.</span></footer></body></html>

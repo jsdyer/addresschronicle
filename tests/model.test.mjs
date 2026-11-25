@@ -1,21 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cleanLines } from '../web/model.mjs';
-test('trims, removes blanks and preserves first-seen order', () => {
-  assert.deepEqual(cleanLines('  Halifax\nLangley\nHalifax\n\nVancouver  '), {
-    text: 'Halifax\nLangley\nVancouver', count: 3, removed: 1,
-  });
-});
-test('supports Windows and old Mac line endings', () => {
-  assert.equal(cleanLines('a\r\nb\ra').text, 'a\nb');
-});
-test('empty text and whitespace produce an empty result', () => {
-  assert.deepEqual(cleanLines(' \n\t'), { text: '', count: 0, removed: 0 });
-});
-test('preserves case and Unicode', () => {
-  assert.equal(cleanLines('Québec\nquébec\n東京\nQuébec').text, 'Québec\nquébec\n東京');
-});
-test('treats markup as ordinary text', () => {
-  assert.equal(cleanLines('<script>alert(1)</script>\n<script>alert(1)</script>').text, '<script>alert(1)</script>');
-});
-test('rejects non-text input', () => { assert.throws(() => cleanLines(null), TypeError); });
+import {normalize,searchPages,scanURL,citation,exportCSV,validPart} from '../web/model.mjs';
+const vol={id:'example',year:1908,city:'Vancouver',title:'Directory',scope:'A test fixture',pages:[{leaf:12,reader_index:11,printed_page:'4',text:'Shop name\n520 Granville Street\nVancouver, B.C.\nFar away\n999 Other Street'}]};
+test('number and street match nearby OCR lines with source page identity',()=>{const r=searchPages([vol],'520 Granville');assert.equal(r.total,1);assert.equal(r.hits[0].reader_index,11);assert.ok(scanURL(r.hits[0]).endsWith('/page/n11/mode/1up'));assert.ok(citation(r.hits[0]).includes('printed page 4'));});
+test('does not join unrelated distant numbers and streets',()=>{assert.equal(searchPages([vol],'999 Granville').total,0);});
+test('phrase mode and whole numeric tokens prevent partial-number match',()=>{assert.equal(searchPages([vol],'20 Granville').total,0);assert.equal(searchPages([vol],'520 Granville',{mode:'phrase'}).total,1);assert.equal(normalize('École, St.'),'ecole st');});
+test('new volumes derive results without fixed initial coverage',()=>{const other={...vol,id:'added-volume',city:'New city',year:1910};const r=searchPages([vol,other],'Granville');assert.equal(r.total,2);assert.equal(r.hits[1].city,'New city');});
+test('reviewed directory sections exclude surrounding material unless requested',()=>{const d={...vol,directory_leaf_ranges:[[20,25]]};assert.equal(searchPages([d],'Granville').total,0);assert.equal(searchPages([d],'Granville',{includeSurrounding:true}).total,1);});
+test('limit retains truthful total and truncated flag',()=>{const r=searchPages([vol,{...vol,id:'second'}],'Granville',{limit:1});assert.equal(r.hits.length,1);assert.equal(r.total,2);assert.equal(r.truncated,true);});
+test('hostile URL identifiers and invalid index data rejected',()=>{assert.throws(()=>scanURL({volume_id:'../../evil',reader_index:1}));assert.throws(()=>validPart({schema_version:1,id:'example',pages:[{leaf:2,reader_index:-1,text:'x'}]},'example'));assert.throws(()=>searchPages([vol],'a'));});
+test('CSV escapes quotes and formula cells',()=>{const hit=searchPages([vol],'Granville').hits[0];hit.snippet='=1+1';assert.ok(exportCSV([hit]).includes('"\'=1+1"'));});

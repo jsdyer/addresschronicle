@@ -1,16 +1,23 @@
 {
-  "id": "coolcode-tool-template",
-  "title": "CoolCode Tool Starter",
-  "description": "A browser-only example that trims lines and removes exact duplicates.",
-  "category": "security",
-  "tags": ["text", "lines", "duplicates"],
-  "icon": "scan-search",
-  "url": "/coolcode-tool-template/",
-  "source": "https://github.com/jsdyer/coolcode-tool-template",
+  "id": "addresschronicle",
+  "title": "Address Chronicle",
+  "description": "Search historical Vancouver and Halifax directories by address, street, person or business, with original scanned-page citations.",
+  "category": "places",
+  "tags": [
+    "history",
+    "directories",
+    "Vancouver",
+    "Halifax",
+    "addresses",
+    "archives"
+  ],
+  "icon": "map",
+  "url": "/addresschronicle/",
+  "source": "https://github.com/jsdyer/addresschronicle",
   "hosting": "project",
   "access": "browser",
   "data_info": {
-    "mode": "local",
-    "detail": "The browser reads the text you paste and compares its lines."
+    "mode": "snapshot",
+    "detail": "Page-indexed Internet Archive OCR from selected historical Vancouver and Halifax directories;monthly source checks."
   }
 }

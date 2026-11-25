@@ -1,37 +1,21 @@
-import { cleanLines } from './model.mjs';
-const input = document.querySelector('#input');
-const output = document.querySelector('#output');
-const status = document.querySelector('#status');
-const copy = document.querySelector('#copy');
-function update() {
-  const result = cleanLines(input.value);
-  output.value = result.text;
-  status.textContent = `${result.count} unique ${result.count === 1 ? 'line' : 'lines'}; ${result.removed} ${result.removed === 1 ? 'duplicate' : 'duplicates'} removed.`;
-  copy.disabled = result.count === 0;
-}
-input.addEventListener('input', update);
-document.querySelector('#sample').addEventListener('click', () => {
-  input.value = '  Halifax\nLangley\nHalifax\n\nVancouver  ';
-  update();
-});
-document.querySelector('#clear').addEventListener('click', () => {
-  input.value = '';
-  update();
-  input.focus();
-});
-if (navigator.clipboard && window.isSecureContext) {
-  copy.hidden = false;
-  copy.disabled = true;
-  copy.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(output.value);
-      status.textContent = 'Result copied.';
-    } catch {
-      output.focus();
-      output.select();
-      status.textContent = 'Copy was unavailable. The result is selected so you can copy it manually.';
-    }
-  });
-}
-// Namespace future preference storage as coolcode:<tool-id>:<key>.
-// Do not persist pasted text or uploads by default.
+import {scanURL,citation,exportCSV,validPart} from './model.mjs';
+const $=s=>document.querySelector(s),NS='coolcode:addresschronicle:evidence';
+const state={catalogue:null,loaded:new Set(),rows:[],shown:20,saved:[],savedView:false,request:0,busy:false};
+try{const list=JSON.parse(localStorage.getItem(NS)||'[]');if(Array.isArray(list))state.saved=list.filter(h=>{try{return typeof h.snippet==='string'&&h.snippet.length<=650&&!!scanURL(h);}catch{return false;}}).slice(0,200);}catch{}
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
+function option(value,text){const n=el('option',text);n.value=value;return n;}
+function link(text,url){const a=el('a',text);a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;}
+function savedCount(){$('#show-saved').textContent=`Saved evidence (${state.saved.length})`;}
+function persist(){try{localStorage.setItem(NS,JSON.stringify(state.saved));$('#save-status').textContent=`${state.saved.length} excerpts saved in this browser.`;}catch{$('#save-status').textContent='Storage unavailable. Saved evidence will last for this visit only.';}savedCount();}
+function card(hit){const box=el('article',undefined,'card');box.append(el('p',`${hit.city} collection · ${hit.year} · ${hit.printed_page?`printed page ${hit.printed_page} · `:''}scan ${hit.reader_index+1}`,'meta'),el('h3',hit.title));box.append(el('p',hit.snippet,'snippet'));box.append(el('p',hit.scope,'scope'));const links=el('div',undefined,'links');links.append(link('Open original scan',scanURL(hit)));const copy=el('button','Copy citation','secondary');copy.onclick=async()=>{try{await navigator.clipboard.writeText(citation(hit));copy.textContent='Citation copied';}catch{$('#save-status').textContent='Clipboard is unavailable. Use Export results to keep the citations.';}};links.append(copy);const save=el('button',undefined,'secondary');function label(){const on=state.saved.some(h=>h.id===hit.id);save.textContent=on?'Remove saved':'Save evidence';save.setAttribute('aria-pressed',String(on));}label();save.onclick=()=>{const on=state.saved.some(h=>h.id===hit.id);if(on)state.saved=state.saved.filter(h=>h.id!==hit.id);else if(state.saved.length<200)state.saved.push(hit);else{$('#save-status').textContent='The saved list holds 200 excerpts. Export it before clearing space.';return;}persist();label();if(state.savedView)showSaved();};links.append(save);box.append(links);return box;}
+function render(){const rows=state.savedView?state.saved:state.rows;$('#results').replaceChildren(...rows.slice(0,state.shown).map(card));if(!rows.length)$('#results').append(el('p',state.savedView?'No evidence saved yet. Search a directory and save an excerpt.':'No nearby text match found in the selected editions. Try the street name alone, a shorter spelling or another edition. OCR errors and gaps are common.','empty'));$('#export').disabled=!rows.length;$('#more').hidden=rows.length<=state.shown;const counts=new Map();for(const h of rows)counts.set(h.year,(counts.get(h.year)||0)+1);$('#timeline').replaceChildren(...[...counts].sort((a,b)=>a[0]-b[0]).map(([year,count])=>el('span',`${year} · ${count} excerpts`,'year')));}
+function showSaved(){state.savedView=true;state.shown=20;$('#results-title').textContent='Your saved evidence';$('#result-note').textContent='Saved excerpts keep their original edition and source links, even if the current collection changes.';render();}
+function updateEditions(){if(!state.catalogue)return;const city=$('#city').value;$('#edition').replaceChildren(option('all','All available editions'),...state.catalogue.volumes.filter(v=>city==='all'||v.city===city).sort((a,b)=>a.year-b.year).map(v=>option(v.id,`${v.year} · ${v.title}`)));}
+function setBusy(on){state.busy=on;for(const s of ['#search-button','#city','#edition','#mode','#query','#surrounding'])$(s).disabled=on;}
+let worker;try{worker=new Worker(new URL('./search-worker.mjs',import.meta.url),{type:'module'});}catch{$('#status').textContent='This browser cannot start the local search worker. Try a current browser.';}
+worker?.addEventListener('message',event=>{const d=event.data;if(d.request!==state.request)return;setBusy(false);if(d.type==='error'){$('#result-note').textContent=d.message;return;}state.rows=d.hits;state.savedView=false;state.shown=20;$('#results-title').textContent=`Results for “${$('#query').value.trim()}”`;$('#result-note').textContent=`${d.total.toLocaleString()} matching excerpts${d.truncated?' · showing the first 200; narrow your query for more precise results':''}. Matches span up to three adjacent OCR lines; confirm the original page before drawing conclusions.`;render();});
+worker?.addEventListener('error',()=>{setBusy(false);$('#result-note').textContent='The local search could not run. Reload the page and try a smaller collection.';});
+async function loadVolume(volume){if(state.loaded.has(volume.id))return;const pages=[];const parts=volume.index_parts;if(!Array.isArray(parts)||!parts.length)throw new Error('This edition has no validated search index.');for(let start=0;start<parts.length;start+=2){const batch=await Promise.all(parts.slice(start,start+2).map(async part=>{if(!/^\.\/data\/volumes\/[A-Za-z0-9_.-]+\.json$/.test(part.path))throw new Error('Invalid index path.');const r=await fetch(part.path,{signal:AbortSignal.timeout(45000)});if(!r.ok)throw new Error(`Could not load ${volume.year} index (${r.status}).`);return validPart(await r.json(),volume.id);}));pages.push(...batch.flat());$('#result-note').textContent=`Loading ${volume.city}, ${volume.year}: ${pages.length.toLocaleString()} of ${volume.page_count.toLocaleString()} indexed pages…`;}if(pages.length!==volume.page_count)throw new Error('An edition is missing pages. Please reload after publication completes.');worker.postMessage({type:'volume',volume:{...volume,pages}});state.loaded.add(volume.id);}
+$('#search-form').onsubmit=async event=>{event.preventDefault();if(state.busy||!state.catalogue||!worker)return;const query=$('#query').value.trim();if(query.length<2)return;const city=$('#city').value,edition=$('#edition').value,volumes=state.catalogue.volumes.filter(v=>(city==='all'||v.city===city)&&(edition==='all'||v.id===edition)).sort((a,b)=>a.year-b.year);setBusy(true);$('#result-note').textContent='Loading only the selected editions, then searching on this device…';try{for(const volume of volumes)await loadVolume(volume);state.request++;worker.postMessage({type:'search',request:state.request,ids:volumes.map(v=>v.id),query,options:{mode:$('#mode').value,limit:200,includeSurrounding:$('#surrounding').checked}});}catch(error){setBusy(false);$('#result-note').textContent=error.message+' Your previous results have been retained.';}};
+$('#city').onchange=updateEditions;$('#more').onclick=()=>{state.shown+=20;render();};$('#show-saved').onclick=showSaved;$('#clear-saved').onclick=()=>{state.saved=[];persist();if(state.savedView)render();};$('#export').onclick=()=>{const rows=state.savedView?state.saved:state.rows,url=URL.createObjectURL(new Blob([exportCSV(rows)],{type:'text/csv;charset=utf-8'})),a=el('a');a.href=url;a.download='addresschronicle-evidence.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+try{const r=await fetch('./data/catalogue.json');if(!r.ok)throw new Error('The published collection catalogue is unavailable.');const data=await r.json();if(data.schema_version!==1||!Array.isArray(data.volumes)||!data.volumes.length)throw new Error('Invalid collection catalogue.');state.catalogue=data;$('#city').replaceChildren(...[...new Set(data.volumes.map(v=>v.city))].sort().map(c=>option(c,c)),option('all','Both collections'));$('#city').value='Vancouver';updateEditions();$('#status').textContent=`${data.volumes.length} selected editions · ${data.total_pages.toLocaleString()} searchable pages · sources checked ${new Date(data.retrieved_at).toLocaleDateString()}`;$('#examples').append(el('span','Try:'));for(const example of data.examples){const b=el('button',example.label);b.type='button';b.onclick=()=>{if(state.busy)return;$('#city').value=example.city;updateEditions();$('#query').value=example.query;$('#search-form').requestSubmit();};$('#examples').append(b);}for(const volume of data.volumes){const box=el('article',undefined,'volume');box.append(el('p',String(volume.year),'edition'),el('h3',volume.title),el('p',`${volume.city} collection · ${volume.page_count.toLocaleString()} indexed pages`),el('p',volume.scope),el('p',`Contributor: ${Array.isArray(volume.contributor)?volume.contributor.join('; '):volume.contributor||'See source item'}`),link('Browse this source',volume.item_url));$('#volumes').append(box);}}catch(error){$('#status').textContent=error.message;$('#search-button').disabled=true;}savedCount();

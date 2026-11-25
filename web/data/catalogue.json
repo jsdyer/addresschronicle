@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "retrieved_at": "2026-11-25T10:43:57.235628+00:00",
+  "volumes": [
+    {
+      "id": "31383021405025",
+      "city": "Vancouver",
+      "year": 1908,
+      "title": "The Elite Directory of Vancouver",
+      "edition_evidence": "Publication date 1908 in Vancouver Public Library item metadata; title-page imprint.",
+      "scope": "A selective social and club directory, not a list of every resident.",
+      "item_url": "https://archive.org/details/31383021405025",
+      "ocr_url": "https://archive.org/download/31383021405025/31383021405025_djvu.xml",
+      "source_title": "The elite directory of Vancouver",
+      "source_catalogue_date": "1908",
+      "source_volume": null,
+      "contributor": "Vancouver Public Library",
+      "rights_statement": "No Known Copyright",
+      "retrieved_at": "2026-11-25T10:43:57.235628+00:00",
+      "source_sha256": "34e16704f34c8bc463e1660b749a39cdc5ef71deb71207ec1bcc215152023ffc",
+      "source_bytes": 1328753,
+      "page_count": 140,
+      "index_parts": [
+        {
+          "path": "./data/volumes/31383021405025-1.json",
+          "page_count": 140
+        }
+      ]
+    },
+    {
+      "id": "1922hendersonsgr00henduoft",
+      "city": "Vancouver",
+      "year": 1922,
+      "title": "Henderson's Greater Vancouver City Directory, 1922",
+      "edition_evidence": "Item volume field 1922. The general catalogue date 1919 describes the serial, not this volume.",
+      "scope": "Greater Vancouver, including city proper, North Vancouver, West Vancouver, South Vancouver and Point Grey.",
+      "item_url": "https://archive.org/details/1922hendersonsgr00henduoft",
+      "ocr_url": "https://archive.org/download/1922hendersonsgr00henduoft/1922hendersonsgr00henduoft_djvu.xml",
+      "source_title": "Henderson's Greater Vancouver city directory : embracing the area of Greater Vancouver, covering the city proper, North Vancouver, West Vancouver, South Vancouver, and Port Grey ... and a classified business directory and buyers' guide. --",
+      "source_catalogue_date": "1919",
+      "source_volume": "1922",
+      "contributor": "Toronto Public Library: Research and Reference Libraries",
+      "rights_statement": "NOT_IN_COPYRIGHT",
+      "retrieved_at": "2026-11-25T10:43:57.235628+00:00",
+      "source_sha256": "53904c93d4d7de586ecc709bd0b662ca21d4642421b0f5efa118973de552b551",
+      "source_bytes": 104941480,
+      "page_count": 1268,
+      "index_parts": [
+        {
+          "path": "./data/volumes/1922hendersonsgr00henduoft-1.json",
+          "page_count": 150
+        },
+        {
+          "path": "./data/volumes/1922hendersonsgr00henduoft-2.json",
+          "page_count": 143
+        },
+        {
+          "path": "./data/volumes/1922hendersonsgr00henduoft-3.json",
+          "page_count": 145
+        },
+        {
+          "path": "./data/volumes/1922hendersonsgr00henduoft-4.json",
+          "page_count": 137
+        },
+        {
+          "path": "./data/volumes/1922hendersonsgr00henduoft-5.json",
+          "page_count": 139
+        },
+        {
+          "path": "./data/volumes/1922hendersonsgr00henduoft-6.json",
+          "page_count": 138
+        },
+        {
+          "path": "./data/volumes/1922hendersonsgr00henduoft-7.json",
+          "page_count": 138
+        },
+        {
+          "path": "./data/volumes/1922hendersonsgr00henduoft-8.json",
+          "page_count": 138
+        },
+        {
+          "path": "./data/volumes/1922hendersonsgr00henduoft-9.json",
+          "page_count": 140
+        }
+      ]
+    },
+    {
+      "id": "cihm_36247",
+      "city": "Halifax",
+      "year": 1860,
+      "title": "Provincial Wesleyan Almanack, 1860",
+      "edition_evidence": "Year 1860 in title and item date.",
+      "scope": "Includes a Halifax business directory, advertisements and wider provincial almanac material; not a complete residential roll.",
+      "item_url": "https://archive.org/details/cihm_36247",
+      "ocr_url": "https://archive.org/download/cihm_36247/cihm_36247_djvu.xml",
+      "source_title": "The Provincial Wesleyan almanack [microform] : for the year of our Lord 1860 : containing all necessary astronomical calculations, prepared with great care for this special object : together with a large amount of general intelligence, railway, telegraph, and post office regulations, religious statistical information, with many other matters of public and provincial interest, including a Halifax business city directory, prepared expressly for this work : making it well calculated for a large circulation as a popular and useful family almanack",
+      "source_catalogue_date": "1860",
+      "source_volume": null,
+      "contributor": "Canadiana.org",
+      "rights_statement": "Consult the source item;historical publication indexed for research.",
+      "retrieved_at": "2026-11-25T10:43:57.235628+00:00",
+      "source_sha256": "30c88c4e868c8ccf7ef5a98b45bbc858627a81ee43fab639145aaf492a89cc98",
+      "source_bytes": 7065362,
+      "page_count": 182,
+      "index_parts": [
+        {
+          "path": "./data/volumes/cihm_36247-1.json",
+          "page_count": 182
+        }
+      ],
+      "directory_leaf_ranges": [
+        [
+          139,
+          150
+        ]
+      ],
+      "range_evidence": "Reviewed OCR section headings and following section boundary; reader links retain the full-book scan index."
+    },
+    {
+      "id": "cihm_36146",
+      "city": "Halifax",
+      "year": 1861,
+      "title": "Provincial Wesleyan Almanack, 1861",
+      "edition_evidence": "Edition year 1861 in title; item catalogue date 1860 may refer to publication before the edition year.",
+      "scope": "Includes a Halifax business directory, advertisements and wider provincial almanac material; not a complete residential roll.",
+      "item_url": "https://archive.org/details/cihm_36146",
+      "ocr_url": "https://archive.org/download/cihm_36146/cihm_36146_djvu.xml",
+      "source_title": "The Provincial Wesleyan almanack [microform] : for the year of our Lord 1861 : containing all necessary astronomical calculations, prepared with great care for this special object : together with a large amount of general intelligence, railway, telegraph, and post office regulations, religious statistical information, with many other matters of public and provincial interest, including a Halifax business city directory, prepared expressly for this work : making it well calculated for a large circulation as a popular and useful family almanack : Volume III",
+      "source_catalogue_date": "1860",
+      "source_volume": null,
+      "contributor": "Canadiana.org",
+      "rights_statement": "Consult the source item;historical publication indexed for research.",
+      "retrieved_at": "2026-11-25T10:43:57.235628+00:00",
+      "source_sha256": "e718434023afa322c17c7389d7c79d681dc8d870cbca9f4a81df033a4076359f",
+      "source_bytes": 7553660,
+      "page_count": 201,
+      "index_parts": [
+        {
+          "path": "./data/volumes/cihm_36146-1.json",
+          "page_count": 201
+        }
+      ],
+      "directory_leaf_ranges": [
+        [
+          123,
+          136
+        ]
+      ],
+      "range_evidence": "Reviewed OCR section headings and following section boundary; reader links retain the full-book scan index."
+    },
+    {
+      "id": "cihm_37348",
+      "city": "Halifax",
+      "year": 1862,
+      "title": "Provincial Wesleyan Almanack, 1862",
+      "edition_evidence": "Year 1862 in title and item date.",
+      "scope": "Includes a Halifax business directory, advertisements and wider provincial almanac material; not a complete residential roll.",
+      "item_url": "https://archive.org/details/cihm_37348",
+      "ocr_url": "https://archive.org/download/cihm_37348/cihm_37348_djvu.xml",
+      "source_title": "The Provincial Wesleyan almanack, for the year of Our Lord 1862 [microform] : containing all necessary astronomical calculations, prepared with great care for this special object : together with a large amount of general intelligence, railway, telegraph, and post office regulations, religious and statistical information, with many other matters of public and provincial interest, including a Halifax business city directory, prepared expressly for this work : making it well calculated for a large circulation as a popular and useful family almanack",
+      "source_catalogue_date": "1862",
+      "source_volume": null,
+      "contributor": "Canadiana.org",
+      "rights_statement": "Consult the source item;historical publication indexed for research.",
+      "retrieved_at": "2026-11-25T10:43:57.235628+00:00",
+      "source_sha256": "2d0a870bbe8dc62a0f34e5edd6383d3f07c0a98e79df6d38dc91c0ed8727a674",
+      "source_bytes": 7150127,
+      "page_count": 197,
+      "index_parts": [
+        {
+          "path": "./data/volumes/cihm_37348-1.json",
+          "page_count": 197
+        }
+      ],
+      "directory_leaf_ranges": [
+        [
+          151,
+          166
+        ]
+      ],
+      "range_evidence": "Reviewed OCR section headings and following section boundary; reader links retain the full-book scan index."
+    },
+    {
+      "id": "cihm_08249",
+      "city": "Halifax",
+      "year": 1900,
+      "title": "Bards & Co's Business and Professional Directory, 1900",
+      "edition_evidence": "Year 1900 in title and item date.",
+      "scope": "Multi-city business directory including Halifax, Dartmouth and other Canadian cities. Check the printed city heading before attributing an address to Halifax.",
+      "item_url": "https://archive.org/details/cihm_08249",
+      "ocr_url": "https://archive.org/download/cihm_08249/cihm_08249_djvu.xml",
+      "source_title": "Bards & Co's business and professional directory [microform] : of Halifax, Amherst, Charlottetown, Dartmouth, Chatham, Fredericton, Kentville, Moncton, New Glasgow, Sydney, N. Sydney, Pictou, Quebec, St. John, St. Stephen, Summerside, Yarmouth, Woodstock, Truro, Windsor, etc. : embracing a list of all business and professional men in the cities above named for the year 1900",
+      "source_catalogue_date": "1900",
+      "source_volume": null,
+      "contributor": "Canadiana.org",
+      "rights_statement": "Consult the source item;historical publication indexed for research.",
+      "retrieved_at": "2026-11-25T10:43:57.235628+00:00",
+      "source_sha256": "62a442759d2b665ffe70e1b3c8175da45591ac01ddd606aaf9455d3103c22351",
+      "source_bytes": 4006650,
+      "page_count": 136,
+      "index_parts": [
+        {
+          "path": "./data/volumes/cihm_08249-1.json",
+          "page_count": 136
+        }
+      ],
+      "directory_leaf_ranges": [
+        [
+          7,
+          29
+        ]
+      ],
+      "range_evidence": "Reviewed OCR section headings and following section boundary; reader links retain the full-book scan index."
+    }
+  ],
+  "examples": [
+    {
+      "city": "Vancouver",
+      "query": "Granville",
+      "label": "Granville Street"
+    },
+    {
+      "city": "Vancouver",
+      "query": "Hastings",
+      "label": "Hastings Street"
+    },
+    {
+      "city": "Halifax",
+      "query": "Barrington",
+      "label": "Barrington Street"
+    },
+    {
+      "city": "Halifax",
+      "query": "Hollis",
+      "label": "Hollis Street"
+    }
+  ],
+  "search_note": "Street numbering,municipal boundaries and spelling changed. Match the original city heading and context; a missing OCR match does not establish that a person or business was absent.",
+  "source": "Internet Archive digitized books and OCR",
+  "total_pages": 2124
+}

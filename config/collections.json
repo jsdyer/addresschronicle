@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "volumes": [
+    {
+      "id": "31383021405025",
+      "city": "Vancouver",
+      "year": 1908,
+      "title": "The Elite Directory of Vancouver",
+      "edition_evidence": "Publication date 1908 in Vancouver Public Library item metadata; title-page imprint.",
+      "scope": "A selective social and club directory, not a list of every resident."
+    },
+    {
+      "id": "1922hendersonsgr00henduoft",
+      "city": "Vancouver",
+      "year": 1922,
+      "title": "Henderson's Greater Vancouver City Directory, 1922",
+      "edition_evidence": "Item volume field 1922. The general catalogue date 1919 describes the serial, not this volume.",
+      "scope": "Greater Vancouver, including city proper, North Vancouver, West Vancouver, South Vancouver and Point Grey."
+    },
+    {
+      "id": "cihm_36247",
+      "city": "Halifax",
+      "year": 1860,
+      "title": "Provincial Wesleyan Almanack, 1860",
+      "edition_evidence": "Year 1860 in title and item date.",
+      "scope": "Includes a Halifax business directory, advertisements and wider provincial almanac material; not a complete residential roll.",
+      "directory_leaf_ranges": [
+        [
+          139,
+          150
+        ]
+      ],
+      "range_evidence": "Reviewed OCR section headings and following section boundary; reader links retain the full-book scan index."
+    },
+    {
+      "id": "cihm_36146",
+      "city": "Halifax",
+      "year": 1861,
+      "title": "Provincial Wesleyan Almanack, 1861",
+      "edition_evidence": "Edition year 1861 in title; item catalogue date 1860 may refer to publication before the edition year.",
+      "scope": "Includes a Halifax business directory, advertisements and wider provincial almanac material; not a complete residential roll.",
+      "directory_leaf_ranges": [
+        [
+          123,
+          136
+        ]
+      ],
+      "range_evidence": "Reviewed OCR section headings and following section boundary; reader links retain the full-book scan index."
+    },
+    {
+      "id": "cihm_37348",
+      "city": "Halifax",
+      "year": 1862,
+      "title": "Provincial Wesleyan Almanack, 1862",
+      "edition_evidence": "Year 1862 in title and item date.",
+      "scope": "Includes a Halifax business directory, advertisements and wider provincial almanac material; not a complete residential roll.",
+      "directory_leaf_ranges": [
+        [
+          151,
+          166
+        ]
+      ],
+      "range_evidence": "Reviewed OCR section headings and following section boundary; reader links retain the full-book scan index."
+    },
+    {
+      "id": "cihm_08249",
+      "city": "Halifax",
+      "year": 1900,
+      "title": "Bards & Co's Business and Professional Directory, 1900",
+      "edition_evidence": "Year 1900 in title and item date.",
+      "scope": "Multi-city business directory including Halifax, Dartmouth and other Canadian cities. Check the printed city heading before attributing an address to Halifax.",
+      "directory_leaf_ranges": [
+        [
+          7,
+          29
+        ]
+      ],
+      "range_evidence": "Reviewed OCR section headings and following section boundary; reader links retain the full-book scan index."
+    }
+  ],
+  "examples": [
+    {
+      "city": "Vancouver",
+      "query": "Granville",
+      "label": "Granville Street"
+    },
+    {
+      "city": "Vancouver",
+      "query": "Hastings",
+      "label": "Hastings Street"
+    },
+    {
+      "city": "Halifax",
+      "query": "Barrington",
+      "label": "Barrington Street"
+    },
+    {
+      "city": "Halifax",
+      "query": "Hollis",
+      "label": "Hollis Street"
+    }
+  ],
+  "search_note": "Street numbering,municipal boundaries and spelling changed. Match the original city heading and context; a missing OCR match does not establish that a person or business was absent."
+}
